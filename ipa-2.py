@@ -40,13 +40,11 @@ def shift_letter(letter, shift):
 
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     if letter != " ":
-        if alphabet.index(letter)+shift>25:
-            shifted= alphabet[alphabet.index(letter)+shift - 26]
-        else:
-            shifted= alphabet[alphabet.index(letter)+shift]
+        shifted= alphabet[(alphabet.index(letter)+shift)%26]
     else:
         shifted = " "
     return shifted
+
 
 def caesar_cipher(message, shift):
     '''Caesar Cipher.
@@ -74,10 +72,7 @@ def caesar_cipher(message, shift):
     cipher = ""
     for letter in message:
         if letter != " ":
-            if alphabet.index(letter)+shift>25:
-                cipher+= alphabet[alphabet.index(letter)+shift - 26]
-            else:
-                cipher+= alphabet[alphabet.index(letter)+shift]
+            cipher+= alphabet[(alphabet.index(letter)+shift)%26]
         else:
             cipher += " "
     return cipher
@@ -260,3 +255,4 @@ def scytale_decipher(message, shift):
     for i in range(len(message)):
         decoded += message[(i // (len(message)//shift)) + (shift) * (i % (len(message)//shift))]
     return decoded
+
